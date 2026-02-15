@@ -27,8 +27,8 @@ export function AuthModal({ mode, open, setOpen }: AuthModalProps) {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await handleSubmit(mode);
-    if (!error) {
+    const ok = await handleSubmit(mode);
+    if (ok) {
       handleClose();
     }
   };

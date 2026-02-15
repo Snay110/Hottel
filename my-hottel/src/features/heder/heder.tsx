@@ -1,5 +1,5 @@
 import { AuthModal } from "../component/AuthModal";
-import { useSignInModal } from "@/features/component/signinHook";
+import { useSignInModal } from "@/features/hook/useSignInModal";
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "@/shered/model/routes";
 
