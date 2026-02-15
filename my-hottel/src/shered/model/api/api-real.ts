@@ -1,4 +1,4 @@
-import type { Hotel, SearchParams } from './types';
+import type { Hotel, SearchParams } from '../../types';
 
 const API_PROVIDER = import.meta.env.VITE_API_PROVIDER || 'mock';
 const API_KEY = import.meta.env.VITE_API_KEY || '';
@@ -48,7 +48,9 @@ const bookingApi = {
       return data.hotels || MOCK_HOTELS;
     } catch (error) {
       console.warn('Booking search failed, using mock data:', error);
-      return MOCK_HOTELS.filter(h => !params.location || h.location?.includes(params.location));
+      return MOCK_HOTELS.filter(
+        (h) => !params.location || (h.location ?? "").includes(params.location),
+      );
     }
   },
 
@@ -108,7 +110,9 @@ const agodaApi = {
       return data.hotels || MOCK_HOTELS;
     } catch (error) {
       console.warn('Agoda search failed, using mock data:', error);
-      return MOCK_HOTELS.filter(h => !params.location || h.location?.includes(params.location));
+      return MOCK_HOTELS.filter(
+        (h) => !params.location || (h.location ?? "").includes(params.location),
+      );
     }
   },
 
@@ -136,7 +140,9 @@ const mockApi = {
   },
   searchHotels: async (params: SearchParams): Promise<Hotel[]> => {
     if (params.location) {
-      return MOCK_HOTELS.filter(h => h.location?.includes(params.location));
+      return MOCK_HOTELS.filter((h) =>
+        (h.location ?? "").includes(params.location ?? ""),
+      );
     }
     return MOCK_HOTELS;
   },
