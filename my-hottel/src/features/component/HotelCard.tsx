@@ -9,7 +9,7 @@ interface HotelCardProps {
   onBook?: () => void;
 }
 
-export function HotelCard({ id, name, rating, reviews, description, price, onBook }: HotelCardProps) {
+export function HotelCard({ name, rating, reviews, description, price, onBook }: HotelCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer">
       <div className="h-48 bg-gradient-to-br from-blue-400 to-blue-600"></div>

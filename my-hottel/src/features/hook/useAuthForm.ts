@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { isSupabaseConfigured, supabase } from '@/shered/model/supabase';
 
 export function useAuthForm() {
   const [email, setEmail] = useState('');
@@ -15,18 +16,31 @@ export function useAuthForm() {
   const handleSubmit = async (mode: 'signin' | 'signup') => {
     if (!email || !password) {
       setError('Please fill in all fields');
-      return;
+      return false;
+    }
+
+    if (!isSupabaseConfigured || !supabase) {
+      setError('Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.');
+      return false;
     }
 
     setLoading(true);
     setError('');
 
     try {
-      console.log(`${mode} with`, { email, password });
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      if (mode === 'signup') {
+        const { error: signUpError } = await supabase.auth.signUp({ email, password });
+        if (signUpError) throw signUpError;
+      } else {
+        const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+        if (signInError) throw signInError;
+      }
+
       resetForm();
+      return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong');
+      return false;
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,7 @@
 import { AuthModal } from "../component/AuthModal";
-import { useSignInModal } from "@/features/component/signinHook";
+import { useSignInModal } from "@/features/hook/useSignInModal";
+import { NavLink } from "react-router-dom";
+import { ROUTES } from "@/shered/model/routes";
 
 export function Header() {
   const { open, setOpen, mode, setMode } = useSignInModal();
@@ -10,18 +12,18 @@ export function Header() {
         <div className="text-2xl font-bold text-indigo-600">MyHotel</div>
 
         <nav className="hidden md:flex gap-8 flex-1 justify-center">
-          <a
-            href="@/features/pages/home-pages.tsx"
+          <NavLink
+            to={ROUTES.HOME}
             className="text-gray-700 hover:text-indigo-600 transition-colors font-medium"
           >
             Home
-          </a>
-          <a
-            href="#"
+          </NavLink>
+          <NavLink
+            to={ROUTES.ROOMS}
             className="text-gray-700 hover:text-indigo-600 transition-colors font-medium"
           >
             Rooms
-          </a>
+          </NavLink>
           <a
             href="#"
             className="text-gray-700 hover:text-indigo-600 transition-colors font-medium"

@@ -1,15 +1,10 @@
-import { useState } from 'react';
 import { SearchInput } from './SearchInput';
 import { Button } from './Button';
+import { useSearchForm } from '../hook/useSearchForm';
 
 export function SearchForm() {
-  const [location, setLocation] = useState('');
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
-
-  const handleSearch = () => {
-    console.log({ location, checkIn, checkOut });
-  };
+  const { location, setLocation, checkIn, setCheckIn, checkOut, setCheckOut, handleSearch } =
+    useSearchForm();
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-4xl">

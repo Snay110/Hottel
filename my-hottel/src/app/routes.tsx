@@ -10,6 +10,10 @@ export const router = createBrowserRouter([
         path: ROUTES.HOME,
         lazy: () => import("@/features/pages/home-pages"),
       },
+      {
+        path: ROUTES.ROOMS,
+        lazy: () => import("@/features/pages/rooms-pages"),
+      },
       //   {
       //     path: ROUTES.HOME,
       //     loader: () => redirect(ROUTES.BOARDS),
